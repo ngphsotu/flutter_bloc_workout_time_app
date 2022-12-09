@@ -3,8 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '/models/workout.dart';
-import '/blocs/workouts_cubit.dart';
+import 'models/workout.dart';
+import 'screens/home_screen.dart';
+import 'blocs/workouts_cubit.dart';
 
 void main() => runApp(const WorkoutTime());
 
@@ -35,9 +36,7 @@ class WorkoutTime extends StatelessWidget {
         },
         child: BlocBuilder<WorkoutsCubit, List<Workout>>(
           builder: (context, state) {
-            return const Scaffold(
-              body: Center(child: Text('Hello World')),
-            );
+            return const HomeScreen();
           },
         ),
       ),
