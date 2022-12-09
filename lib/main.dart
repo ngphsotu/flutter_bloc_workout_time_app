@@ -3,9 +3,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'models/workout.dart';
+import 'blocs/workout_cubit.dart';
 import 'screens/home_screen.dart';
 import 'blocs/workouts_cubit.dart';
+import 'states/workout_state.dart';
+import 'screens/edit_workout_screen.dart';
 
 void main() => runApp(const WorkoutTime());
 
@@ -23,20 +25,34 @@ class WorkoutTime extends StatelessWidget {
           bodyText2: TextStyle(color: Color.fromARGB(255, 66, 74, 96)),
         ),
       ),
-      home: BlocProvider<WorkoutsCubit>(
-        create: (BuildContext context) {
-          WorkoutsCubit workoutsCubit = WorkoutsCubit();
-          if (workoutsCubit.state.isEmpty) {
-            workoutsCubit.getWorkouts();
-            print('Loading json since the state is empty');
-          } else {
-            print('The state is not empty');
-          }
-          return workoutsCubit;
-        },
-        child: BlocBuilder<WorkoutsCubit, List<Workout>>(
+      home: MultiBlocProvider(
+        providers: [
+          BlocProvider<WorkoutsCubit>(
+            create: (BuildContext context) {
+              WorkoutsCubit workoutsCubit = WorkoutsCubit();
+              if (workoutsCubit.state.isEmpty) {
+                workoutsCubit.getWorkouts();
+                print('Load json file successfully');
+              } else {
+                print('Error load json file');
+              }
+              return workoutsCubit;
+            },
+          ),
+          BlocProvider<WorkoutCubit>(
+            create: (BuildContext context) {
+              return WorkoutCubit();
+            },
+          ),
+        ],
+        child: BlocBuilder<WorkoutCubit, WorkoutState>(
           builder: (context, state) {
-            return const HomeScreen();
+            if (state is WorkoutIntial) {
+              return const HomeScreen();
+            } else if (state is WorkoutEditing) {
+              return const EditWorkoutScreen();
+            }
+            return Container();
           },
         ),
       ),

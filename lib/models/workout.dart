@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_print
-
 import 'package:equatable/equatable.dart';
 
 import '/models/exercise.dart';
@@ -17,7 +15,6 @@ class Workout extends Equatable {
     for (var ex in (json['exercises'] as Iterable)) {
       exercises.add(Exercise.fromJson(ex, index, startTime));
       index++;
-      print('Loading workouts.json: $index');
       startTime += exercises.last.prelude! + exercises.last.duration!;
     }
     return Workout(title: json['title'] as String?, exercises: exercises);
@@ -28,7 +25,6 @@ class Workout extends Equatable {
   int getTotal() {
     int time =
         exercises.fold(0, (prev, ex) => prev + ex.duration! + ex.prelude!);
-    print('The total of time is: $time seconds');
     return time;
   }
 
