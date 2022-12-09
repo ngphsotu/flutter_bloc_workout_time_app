@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_bloc_workout_time_app/helpers.dart';
 
+import '/helpers.dart';
 import '/models/workout.dart';
 import '/blocs/workouts_cubit.dart';
 
@@ -49,16 +49,18 @@ class HomeScreen extends StatelessWidget {
                       itemCount: workout.exercises.length,
                       itemBuilder: (BuildContext context, int index) =>
                           ListTile(
-                        onTap: null,
+                        onTap: () {},
                         visualDensity: const VisualDensity(
                           horizontal: 0,
                           vertical: VisualDensity.maximumDensity,
                         ),
-                        leading: const IconButton(
-                          onPressed: null,
-                          icon: Icon(Icons.edit),
+                        leading: Text(
+                          formatTime(workout.exercises[index].prelude!, true),
                         ),
                         title: Text(workout.exercises[index].title!),
+                        trailing: Text(
+                          formatTime(workout.exercises[index].duration!, true),
+                        ),
                       ),
                     ),
                   ),
