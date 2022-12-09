@@ -28,8 +28,8 @@ class HomeScreen extends StatelessWidget {
           builder: (context, workouts) => ExpansionPanelList.radio(
             children: workouts
                 .map(
-                  (e) => ExpansionPanelRadio(
-                    value: e,
+                  (workout) => ExpansionPanelRadio(
+                    value: workout,
                     headerBuilder: (BuildContext context, bool isExpanded) =>
                         ListTile(
                       visualDensity: const VisualDensity(
@@ -40,9 +40,25 @@ class HomeScreen extends StatelessWidget {
                         onPressed: null,
                         icon: Icon(Icons.edit),
                       ),
-                      title: Text(e.title!),
+                      title: Text(workout.title!),
                     ),
-                    body: Container(),
+                    body: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: workout.exercises.length,
+                      itemBuilder: (BuildContext context, int index) =>
+                          ListTile(
+                        onTap: null,
+                        visualDensity: const VisualDensity(
+                          horizontal: 0,
+                          vertical: VisualDensity.maximumDensity,
+                        ),
+                        leading: const IconButton(
+                          onPressed: null,
+                          icon: Icon(Icons.edit),
+                        ),
+                        title: Text(workout.exercises[index].title!),
+                      ),
+                    ),
                   ),
                 )
                 .toList(),
