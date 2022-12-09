@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_bloc_workout_time_app/helpers.dart';
 
 import '/models/workout.dart';
 import '/blocs/workouts_cubit.dart';
@@ -41,6 +42,7 @@ class HomeScreen extends StatelessWidget {
                         icon: Icon(Icons.edit),
                       ),
                       title: Text(workout.title!),
+                      trailing: Text(formatTime(workout.getTotal(), true)),
                     ),
                     body: ListView.builder(
                       shrinkWrap: true,
