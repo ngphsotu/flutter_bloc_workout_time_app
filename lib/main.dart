@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:path_provider/path_provider.dart';
 
 import 'blocs/workout_cubit.dart';
 import 'screens/home_screen.dart';
@@ -9,7 +11,15 @@ import 'blocs/workouts_cubit.dart';
 import 'states/workout_state.dart';
 import 'screens/edit_workout_screen.dart';
 
-void main() => runApp(const WorkoutTime());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final storage = HydratedStorage.build(
+      storageDirectory: await getApplicationDocumentsDirectory());
+  HydratedBlocOverrides.runZoned(
+    () => runApp(const WorkoutTime()),
+    storage: storage,
+  );
+}
 
 class WorkoutTime extends StatelessWidget {
   const WorkoutTime({super.key});
