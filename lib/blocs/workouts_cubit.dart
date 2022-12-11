@@ -20,7 +20,8 @@ class WorkoutsCubit extends HydratedCubit<List<Workout>> {
   }
 
   saveWorkout(Workout workout, int index) {
-    Workout newWorkout = Workout(title: workout.title, exercises: const []);
+    // ignore: prefer_const_literals_to_create_immutables
+    Workout newWorkout = Workout(title: workout.title, exercises: []);
     // ignore: unused_local_variable
     int exIndex = 0;
     // ignore: unused_local_variable
@@ -57,6 +58,7 @@ class WorkoutsCubit extends HydratedCubit<List<Workout>> {
   Map<String, dynamic>? toJson(List<Workout> state) {
     // ignore: todo
     // TODO: implement toJson
+    // ignore: unnecessary_type_check
     if (state is List<Workout>) {
       var json = {'workouts': []};
       for (var workout in state) {

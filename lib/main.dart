@@ -13,12 +13,13 @@ import 'screens/edit_workout_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final storage = HydratedStorage.build(
+  final storage = await HydratedStorage.build(
       storageDirectory: await getApplicationDocumentsDirectory());
   HydratedBlocOverrides.runZoned(
     () => runApp(const WorkoutTime()),
     storage: storage,
   );
+  print('========== Start main: $main');
 }
 
 class WorkoutTime extends StatelessWidget {
