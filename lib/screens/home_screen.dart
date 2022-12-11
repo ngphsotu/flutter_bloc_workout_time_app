@@ -16,12 +16,12 @@ class HomeScreen extends StatelessWidget {
         title: const Text('Workout Time!'),
         actions: [
           IconButton(
-            onPressed: () {},
             icon: const Icon(Icons.event_available),
+            onPressed: () {},
           ),
           IconButton(
-            onPressed: () {},
             icon: const Icon(Icons.settings),
+            onPressed: () {},
           ),
         ],
       ),
@@ -47,6 +47,10 @@ class HomeScreen extends StatelessWidget {
                       ),
                       title: Text(workout.title!),
                       trailing: Text(formatTime(workout.getTotal(), true)),
+                      onTap: () => !isExpanded
+                          ? BlocProvider.of<WorkoutCubit>(context)
+                              .startWorkout(workout)
+                          : null,
                     ),
                     body: ListView.builder(
                       shrinkWrap: true,

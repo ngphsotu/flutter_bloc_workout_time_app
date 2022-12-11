@@ -8,7 +8,8 @@ import 'package:path_provider/path_provider.dart';
 import 'blocs/workout_cubit.dart';
 import 'screens/home_screen.dart';
 import 'blocs/workouts_cubit.dart';
-import 'states/workout_state.dart';
+import 'states/workout_states.dart';
+import 'screens/workout_progress.dart';
 import 'screens/edit_workout_screen.dart';
 
 void main() async {
@@ -19,7 +20,6 @@ void main() async {
     () => runApp(const WorkoutTime()),
     storage: storage,
   );
-  print('========== Start main: $main');
 }
 
 class WorkoutTime extends StatelessWidget {
@@ -45,7 +45,8 @@ class WorkoutTime extends StatelessWidget {
                 workoutsCubit.getWorkouts();
                 print('Load json file successfully');
               } else {
-                print('Error load json file');
+                workoutsCubit.getWorkouts();
+                print('Error load json file, return workoutsCubit');
               }
               return workoutsCubit;
             },
@@ -63,7 +64,7 @@ class WorkoutTime extends StatelessWidget {
             } else if (state is WorkoutEditing) {
               return const EditWorkoutScreen();
             }
-            return Container();
+            return const WorkoutProgress();
           },
         ),
       ),

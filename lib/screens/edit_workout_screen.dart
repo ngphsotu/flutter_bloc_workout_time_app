@@ -6,7 +6,7 @@ import '/models/workout.dart';
 import '/models/exercise.dart';
 import '/blocs/workout_cubit.dart';
 import 'edit_exercise_screen.dart';
-import '/states/workout_state.dart';
+import '../states/workout_states.dart';
 import '/blocs/workouts_cubit.dart';
 
 class EditWorkoutScreen extends StatelessWidget {

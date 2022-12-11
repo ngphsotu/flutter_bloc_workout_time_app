@@ -31,6 +31,11 @@ class Workout extends Equatable {
     return time;
   }
 
+  Exercise getCurrentExercise(int? elapsed) {
+    return exercises.lastWhere((element) => element.startTime! <= elapsed!);
+    // Last smalled element object
+  }
+
   @override
   // ignore: todo
   // TODO: implement props
