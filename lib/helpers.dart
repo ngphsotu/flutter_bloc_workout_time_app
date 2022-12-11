@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 String formatTime(int seconds, bool pad) {
   // 70/60 => 1 (minute)
   // 70%60 => 10 (seconds)
